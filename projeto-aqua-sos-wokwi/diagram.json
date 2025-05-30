@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "author": "ChatGPT",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 60, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultra",
+      "top": -17.7,
+      "left": 197.5,
+      "attrs": { "distance": "138" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": -3.6, "left": 99.8, "attrs": { "color": "red" } },
+    { "type": "wokwi-buzzer", "id": "buzz1", "top": -16.8, "left": -65.4, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 6.2,
+      "left": -144,
+      "attrs": { "color": "blue", "label": "SILENC" }
+    }
+  ],
+  "connections": [
+    [ "ultra:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "ultra:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "ultra:TRIG", "esp:D5", "green", [ "v0" ] ],
+    [ "ultra:ECHO", "esp:D18", "yellow", [ "v0" ] ],
+    [ "led1:A", "esp:D4", "orange", [ "v0" ] ],
+    [ "led1:C", "esp:GND.2", "black", [ "v0" ] ],
+    [ "buzz1:1", "esp:D12", "blue", [ "v0" ] ],
+    [ "buzz1:2", "esp:GND.2", "black", [ "v0" ] ],
+    [ "btn1:1.l", "esp:D13", "cyan", [ "h-28.8", "v182.4", "h177.8" ] ],
+    [ "btn1:2.l", "esp:GND.2", "black", [ "v0" ] ],
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ]
+  ],
+  "dependencies": {}
+}

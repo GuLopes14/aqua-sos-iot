@@ -1,0 +1,136 @@
+[
+    {
+        "id": "864a79b1c6dd7fa7",
+        "type": "tab",
+        "label": "Fluxo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "mqtt-in-agua",
+        "type": "mqtt in",
+        "z": "864a79b1c6dd7fa7",
+        "name": "Recebe nível MQTT",
+        "topic": "aquasos/agua/nivel",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "broker-hivemq",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 510,
+        "y": 400,
+        "wires": [
+            [
+                "json-convert"
+            ]
+        ]
+    },
+    {
+        "id": "json-convert",
+        "type": "json",
+        "z": "864a79b1c6dd7fa7",
+        "name": "Converte payload para JSON",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 740,
+        "y": 540,
+        "wires": [
+            [
+                "a914ebe368ce1a9c"
+            ]
+        ]
+    },
+    {
+        "id": "ui_gauge_nivel",
+        "type": "ui_gauge",
+        "z": "864a79b1c6dd7fa7",
+        "name": "Nível da Caixa",
+        "group": "d655d38509d4fc6a",
+        "order": 1,
+        "width": 6,
+        "height": 3,
+        "gtype": "gage",
+        "title": "Nível da quantidade de água ",
+        "label": "%",
+        "format": "{{payload}}",
+        "min": 0,
+        "max": 100,
+        "colors": [
+            "#c02626",
+            "#e6e600",
+            "#43cb3a"
+        ],
+        "seg1": 20,
+        "seg2": 50,
+        "diff": false,
+        "className": "",
+        "x": 950,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a914ebe368ce1a9c",
+        "type": "function",
+        "z": "864a79b1c6dd7fa7",
+        "name": "function 1",
+        "func": "msg.payload = msg.payload.nivel;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 480,
+        "wires": [
+            [
+                "ui_gauge_nivel"
+            ]
+        ]
+    },
+    {
+        "id": "broker-hivemq",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d655d38509d4fc6a",
+        "type": "ui_group",
+        "name": "Monitoramento",
+        "tab": "48669e79d7bda44a",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "48669e79d7bda44a",
+        "type": "ui_tab",
+        "name": "Estoque de Água",
+        "icon": "water",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
